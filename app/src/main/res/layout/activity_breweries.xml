@@ -13,7 +13,17 @@
         android:layout_height="wrap_content"
         android:text="Breweries near:"
         app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginLeft="-31dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginStart="8dp" />
+
+    <ListView
+        android:layout_width="383dp"
+        android:layout_height="494dp"
+        android:id="@+id/listView"
+        tools:layout_editor_absoluteY="33dp"
         android:layout_marginLeft="8dp"
         app:layout_constraintLeft_toLeftOf="parent" />
+
 </android.support.constraint.ConstraintLayout>
