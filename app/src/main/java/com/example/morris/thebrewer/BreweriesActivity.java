@@ -8,6 +8,7 @@ import android.widget.TextView;
 public class BreweriesActivity extends AppCompatActivity {
     private TextView mLocationTextView;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
