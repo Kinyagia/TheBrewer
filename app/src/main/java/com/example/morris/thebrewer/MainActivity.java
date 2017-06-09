@@ -10,23 +10,25 @@ import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.EditText;
 
+import butterknife.Bind;
+import butterknife.ButterKnife;
+
 public class MainActivity extends AppCompatActivity {
-    private Button mFindBreweryButton;
-    private EditText mLocationEditText;
+    @Bind(R.id.findBreweryButton) Button mFindBreweryButton;
+    @Bind(R.id.nameEditText) EditText mNameEditText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        mLocationEditText = (EditText) findViewById(R.id.locationEditText);
-        mFindBreweryButton  = (Button) findViewById(R.id.findBreweryButton);
+        ButterKnife.bind(this);
 
         mFindBreweryButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String location = mLocationEditText.getText().toString();
+                String name = mNameEditText.getText().toString();
                 Intent intent = new Intent(MainActivity.this, BreweriesActivity.class);
-                intent.putExtra("location", location);
+                intent.putExtra("name", name);
                 startActivity(intent);
 
 

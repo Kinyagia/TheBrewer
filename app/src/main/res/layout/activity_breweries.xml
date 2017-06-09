@@ -8,7 +8,7 @@
 
 
     <TextView
-        android:id="@+id/locationTextView"
+        android:id="@+id/nameTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Breweries near:"
@@ -19,11 +19,11 @@
         android:layout_marginStart="8dp" />
 
     <ListView
-        android:layout_width="383dp"
-        android:layout_height="494dp"
+        android:layout_width="442dp"
+        android:layout_height="483dp"
         android:id="@+id/listView"
-        tools:layout_editor_absoluteY="33dp"
-        android:layout_marginLeft="8dp"
+        tools:layout_editor_absoluteY="40dp"
+        android:layout_marginLeft="-56dp"
         app:layout_constraintLeft_toLeftOf="parent" />
 
 </android.support.constraint.ConstraintLayout>
