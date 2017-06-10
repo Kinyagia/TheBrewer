@@ -28,7 +28,7 @@ public class BreweriesActivity extends AppCompatActivity {
     @Bind (R.id.nameTextView)TextView mNameTextView;
     @Bind(R.id.listView) ListView mListView;
 
-    public ArrayList<String> mBreweries = new ArrayList<>();
+    public ArrayList<Brewery> mBreweries = new ArrayList<>();
 
 
     @Override
@@ -71,7 +71,10 @@ public class BreweriesActivity extends AppCompatActivity {
             public void onResponse(Call call, Response response) throws IOException {
                 try {
                     String jsonData = response.body().string();
-                    Log.v(TAG, jsonData);
+                    if (response.isSuccessful()) {
+                        Log.v(TAG, jsonData);
+                        mBreweries = brewerService.processResults(response);
+                    }
                 } catch (IOException e){
                     e.printStackTrace();
                 }
