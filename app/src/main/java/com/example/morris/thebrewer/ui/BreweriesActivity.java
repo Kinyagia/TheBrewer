@@ -3,6 +3,8 @@ package com.example.morris.thebrewer.ui;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -10,6 +12,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.morris.thebrewer.adapters.BreweryListAdapter;
 import com.example.morris.thebrewer.services.BrewerService;
 import com.example.morris.thebrewer.R;
 import com.example.morris.thebrewer.models.Brewery;
@@ -28,8 +31,8 @@ public class BreweriesActivity extends AppCompatActivity {
 
     public static final String TAG = BreweriesActivity.class.getSimpleName() ;
 
-    @Bind (R.id.nameTextView)TextView mNameTextView;
-    @Bind(R.id.listView) ListView mListView;
+    @Bind(R.id.recyclerView) RecyclerView mRecyclerView;
+    private BreweryListAdapter mAdapter;
 
     public ArrayList<Brewery> mBreweries = new ArrayList<>();
 
@@ -40,22 +43,8 @@ public class BreweriesActivity extends AppCompatActivity {
         setContentView(R.layout.activity_breweries);
         ButterKnife.bind(this);
 
-
-        ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, mBreweries );
-        mListView.setAdapter(adapter);
-
         Intent intent = getIntent();
         String name = intent.getStringExtra("name");
-        mNameTextView.setText("Here are all the beers: " + name);
-
-
-        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                String brewery = ((TextView)view).getText().toString();
-                Toast.makeText(BreweriesActivity.this, brewery, Toast.LENGTH_LONG).show();
-            }
-        });
 
         getBreweries(name);
     }
@@ -77,14 +66,12 @@ public class BreweriesActivity extends AppCompatActivity {
                 BreweriesActivity.this.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        String[] beerNames = new String[mBreweries.size()];
+                        mAdapter = new BreweryListAdapter(getApplicationContext(), mBreweries);
+                        mRecyclerView.setAdapter(mAdapter);
+                        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(BreweriesActivity.this);
+                        mRecyclerView.setLayoutManager(layoutManager);
+                        mRecyclerView.setHasFixedSize(true);
 
-                        for (int i= 0; i< beerNames.length; i++) {
-                            beerNames[i] = mBreweries.get(i).getName();
-                        }
-
-                        ArrayAdapter adapter = new ArrayAdapter(BreweriesActivity.this, android.R.layout.simple_list_item_1, beerNames);
-                        mListView.setAdapter(adapter);
                     }
                 });
 
