@@ -2,6 +2,8 @@ package com.example.morris.thebrewer;
 
 import android.support.test.rule.ActivityTestRule;
 
+import com.example.morris.thebrewer.ui.MainActivity;
+
 import org.junit.Rule;
 import org.junit.Test;
 

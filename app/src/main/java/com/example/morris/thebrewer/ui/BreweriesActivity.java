@@ -1,15 +1,18 @@
-package com.example.morris.thebrewer;
+package com.example.morris.thebrewer.ui;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.example.morris.thebrewer.services.BrewerService;
+import com.example.morris.thebrewer.R;
+import com.example.morris.thebrewer.models.Brewery;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -68,16 +71,23 @@ public class BreweriesActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onResponse(Call call, Response response) throws IOException {
-                try {
-                    String jsonData = response.body().string();
-                    if (response.isSuccessful()) {
-                        Log.v(TAG, jsonData);
-                        mBreweries = brewerService.processResults(response);
+            public void onResponse(Call call, Response response) {
+                mBreweries = BrewerService.processResults(response);
+
+                BreweriesActivity.this.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        String[] beerNames = new String[mBreweries.size()];
+
+                        for (int i= 0; i< beerNames.length; i++) {
+                            beerNames[i] = mBreweries.get(i).getName();
+                        }
+
+                        ArrayAdapter adapter = new ArrayAdapter(BreweriesActivity.this, android.R.layout.simple_list_item_1, beerNames);
+                        mListView.setAdapter(adapter);
                     }
-                } catch (IOException e){
-                    e.printStackTrace();
-                }
+                });
+
 
             }
         });

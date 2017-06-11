@@ -1,4 +1,4 @@
-package com.example.morris.thebrewer;
+package com.example.morris.thebrewer.models;
 
 /**
  * Created by morris on 6/9/17.

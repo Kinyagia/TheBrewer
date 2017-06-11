@@ -1,4 +1,7 @@
-package com.example.morris.thebrewer;
+package com.example.morris.thebrewer.services;
+
+import com.example.morris.thebrewer.Constants;
+import com.example.morris.thebrewer.models.Brewery;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -42,7 +45,7 @@ public class BrewerService {
     }
 
 
-        public ArrayList<Brewery> processResults (Response response) {
+        public static ArrayList<Brewery> processResults(Response response) {
             ArrayList<Brewery> breweries = new ArrayList<>();
 
             try {
