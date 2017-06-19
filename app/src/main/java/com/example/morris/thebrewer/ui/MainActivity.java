@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String name = mNameEditText.getText().toString();
-                Intent intent = new Intent(MainActivity.this, BreweriesActivity.class);
+                Intent intent = new Intent(MainActivity.this, BreweriesListActivity.class);
                 intent.putExtra("name", name);
                 startActivity(intent);
 

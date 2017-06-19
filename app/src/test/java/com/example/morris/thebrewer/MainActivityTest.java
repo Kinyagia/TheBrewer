@@ -4,7 +4,7 @@ import android.content.Intent;
 import android.os.Build;
 import android.widget.TextView;
 ;
-import com.example.morris.thebrewer.ui.BreweriesActivity;
+import com.example.morris.thebrewer.ui.BreweriesListActivity;
 import com.example.morris.thebrewer.ui.MainActivity;
 
 import org.junit.Before;
@@ -41,7 +41,7 @@ public class MainActivityTest {
     @Test
     public void secondActivityStarted() {
         activity.findViewById(R.id.findBreweryButton).performClick();
-        Intent expectedIntent = new Intent(activity, BreweriesActivity.class);
+        Intent expectedIntent = new Intent(activity, BreweriesListActivity.class);
         ShadowActivity shadowActivity = org.robolectric.Shadows.shadowOf(activity);
         Intent actualIntent = shadowActivity.getNextStartedActivity();
         assertTrue(actualIntent.filterEquals(expectedIntent));

@@ -23,6 +23,7 @@ import okhttp3.Response;
 
 public class BrewerService {
     private static OkHttpClient client = new OkHttpClient();
+
     public static void findBreweries(String name, Callback callback) {
 
 //        OkHttpClient client = new OkHttpClient.Builder()
@@ -43,35 +44,36 @@ public class BrewerService {
         Call call = client.newCall(request);
         call.enqueue(callback);
     }
+ public static ArrayList<Brewery> processResults(Response response) {
+     ArrayList<Brewery> breweries = new ArrayList<>();
 
+     try {
+         String jsonData = response.body().string();
+         if (response.isSuccessful()) {
+             JSONObject snoothJSON = new JSONObject(jsonData);
+             JSONArray winesJSON = snoothJSON.getJSONArray("wines");
+             for (int i =0; i < winesJSON.length(); i++) {
+                 JSONObject breweryJSON = winesJSON.getJSONObject(i);
+                 String name = breweryJSON.getString("name");
+                 String winery = breweryJSON.getString("winery");
+                 String varietal = breweryJSON.getString("varietal");
+                 String price = breweryJSON.getString("price");
+                 String vintage = breweryJSON.getString("vintage");
+                 String type = breweryJSON.getString("type");
+                 String link = breweryJSON.getString("link");
+                 String image = breweryJSON.getString("image");
 
-        public static ArrayList<Brewery> processResults(Response response) {
-            ArrayList<Brewery> breweries = new ArrayList<>();
+                 Brewery brewery = new Brewery(name, winery, varietal, price, vintage, type, link, image);
+                 breweries.add(brewery);
 
-            try {
-                String jsonData = response.body().string();
-                if (response.isSuccessful()) {
-                    JSONObject beerJSON = new JSONObject(jsonData);
-                    JSONArray dataJSON = beerJSON.getJSONArray("data");
-                    for (int i = 0; i < dataJSON.length(); i++) {
-                        JSONObject breweryJSON = dataJSON.getJSONObject(i);
-                        String name = breweryJSON.optString("name");
-                        String isOrganic = breweryJSON.optString("isOrganic", "Not Known");
+             }
+         }
+     } catch (JSONException e) {
+         e.printStackTrace();
+     } catch (IOException e) {
+         e.printStackTrace();
+     }
+     return breweries;
+ }
 
-                        Brewery brewery = new Brewery(name, isOrganic);
-                        breweries.add(brewery);
-                    }
-                }
-
-
-
-            } catch (IOException e) {
-                e.printStackTrace();
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-            return breweries;
-        }
-
-    }
-
+}

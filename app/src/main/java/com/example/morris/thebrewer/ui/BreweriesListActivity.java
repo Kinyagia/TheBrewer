@@ -5,12 +5,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.morris.thebrewer.adapters.BreweryListAdapter;
 import com.example.morris.thebrewer.services.BrewerService;
@@ -27,9 +21,9 @@ import okhttp3.Callback;
 import okhttp3.Response;
 
 
-public class BreweriesActivity extends AppCompatActivity {
+public class BreweriesListActivity extends AppCompatActivity {
 
-    public static final String TAG = BreweriesActivity.class.getSimpleName() ;
+    public static final String TAG = BreweriesListActivity.class.getSimpleName() ;
 
     @Bind(R.id.recyclerView) RecyclerView mRecyclerView;
     private BreweryListAdapter mAdapter;
@@ -61,14 +55,15 @@ public class BreweriesActivity extends AppCompatActivity {
 
             @Override
             public void onResponse(Call call, Response response) {
+
                 mBreweries = BrewerService.processResults(response);
 
-                BreweriesActivity.this.runOnUiThread(new Runnable() {
+                BreweriesListActivity.this.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
                         mAdapter = new BreweryListAdapter(getApplicationContext(), mBreweries);
                         mRecyclerView.setAdapter(mAdapter);
-                        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(BreweriesActivity.this);
+                        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(BreweriesListActivity.this);
                         mRecyclerView.setLayoutManager(layoutManager);
                         mRecyclerView.setHasFixedSize(true);
 
