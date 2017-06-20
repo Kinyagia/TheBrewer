@@ -22,7 +22,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".ui.BreweriesListActivity" />
-        <activity android:name=".ui.BreweryDetailActivity"></activity>
+        <activity android:name=".ui.BreweryDetailActivity" />
+        <activity android:name=".ui.SavedBreweryListActivity"></activity>
     </application>
 
 </manifest>

@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "608834883519",
+    "firebase_url": "https://thebrewer-f38b8.firebaseio.com",
+    "project_id": "thebrewer-f38b8",
+    "storage_bucket": "thebrewer-f38b8.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:608834883519:android:e82875f75f468a3a",
+        "android_client_info": {
+          "package_name": "com.example.morris.thebrewer"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "608834883519-thttrv7oa65nte18t3ghhv973h7ill2g.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.morris.thebrewer",
+            "certificate_hash": "23b6f515479f92a96eb431da463119c3cb023c8d"
+          }
+        },
+        {
+          "client_id": "608834883519-rcd4q3lrcf6s78574o534f1n4l4fvc92.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAAANi3xuDPlSliaHEJ1hEynw8f-jcIjq0"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "608834883519-rcd4q3lrcf6s78574o534f1n4l4fvc92.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

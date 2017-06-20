@@ -8,11 +8,16 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.morris.thebrewer.Constants;
 import com.example.morris.thebrewer.R;
 import com.example.morris.thebrewer.models.Brewery;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.squareup.picasso.Picasso;
 
 import org.parceler.Parcels;
@@ -34,6 +39,9 @@ public class BreweryDetailFragment extends Fragment implements  View.OnClickList
     TextView mTypeLabel;
     @Bind(R.id.linkTextView)
     TextView mLinkLabel;
+    @Bind(R.id.saveWineButton)
+    Button mSaveWineButton;
+
 
     private Brewery mBrewery;
 
@@ -60,6 +68,8 @@ public class BreweryDetailFragment extends Fragment implements  View.OnClickList
 
         ButterKnife.bind(this, view);
         mLinkLabel.setOnClickListener(this);
+        mSaveWineButton.setOnClickListener(this);
+
 
         Picasso.with(view.getContext())
                 .load(mBrewery.getImage())
@@ -77,6 +87,13 @@ public class BreweryDetailFragment extends Fragment implements  View.OnClickList
         if (v == mLinkLabel) {
             Intent webIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(mBrewery.getLink()));
             startActivity(webIntent);
+        }
+        if (v == mSaveWineButton) {
+            DatabaseReference breweryRef = FirebaseDatabase
+                    .getInstance()
+                    .getReference(Constants.FIREBASE_CHILD_BREWERIES);
+            breweryRef.push().setValue(mBrewery);
+            Toast.makeText(getContext(), "Saved", Toast.LENGTH_SHORT).show();
         }
     }
 

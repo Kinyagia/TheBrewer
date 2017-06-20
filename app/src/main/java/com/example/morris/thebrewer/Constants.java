@@ -9,4 +9,5 @@ public class Constants {
     public static final String BASE_URL = "http://api.snooth.com/wines";
     public static final String NAME_QUERY_PARAMETER = "q";
     public static final String API_KEY_QUERY_PARAMETER ="akey";
+    public static final String FIREBASE_CHILD_BREWERIES = "breweries";
 }
